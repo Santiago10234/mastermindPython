@@ -16,3 +16,7 @@ def mostrar_colores(paleta):
         "Blue": "🔵"
     }
     return " ".join(colores_disponibles[color] for color in paleta)
+
+print("Bienvanido/a a Mastermind")
+print(f"Colores disponibles: {", ".join(colores)}")
+print(f"Longitud del codigo: {code_length}, Intentos maximos: {maximo_intentos}")
