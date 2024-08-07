@@ -42,4 +42,7 @@ class Tablero_juego:
             for feedback in retroalimentacion
         ])
         
+        print(f"{intento_mostrado}     |     {retroalimentacion}")
     
+    def actualizar_intentos(self, intento, retroalimentacion):
+        self.intentos.append((intento, retroalimentacion))
