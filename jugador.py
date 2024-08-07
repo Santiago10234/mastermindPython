@@ -1,22 +1,8 @@
-import random
-from termcolor import colored
+import random 
 
-colores = ["Red", "Green", "Yellow", "Blue"]
-code_length = 4
-maximo_intentos = 10
-
-code = random.choices(colores, k=code_length)
-intentos = 0
-
-def mostrar_colores(paleta):
-    colores_disponibles = {
-        "Red": "🔴",
-        "Green": "🟢",
-        "Yellow": "🟡",
-        "Blue": "🔵"
-    }
-    return " ".join(colores_disponibles[color] for color in paleta)
-
-print("Bienvanido/a a Mastermind")
-print(f"Colores disponibles: {", ".join(colores)}")
-print(f"Longitud del codigo: {code_length}, Intentos maximos: {maximo_intentos}")
+class Jugador:
+    colores = ["red", "green", "yellow", "blue"]
+    
+    def __init__(self, el_jugador = True):
+        self.el_jugador = el_jugador
+        
