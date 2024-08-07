@@ -1,48 +1,55 @@
 from colored import fg,attr
 
-class Tablero_juego:
-    COLORES={
-        "R":fg("red"),
-        "G":fg("green"),
-        "Y":fg("yellow"),
-        "B":fg("blue")
+class Tablero:
+    COLORES = {
+        "r":fg("red"),
+        "g":fg("green"),
+        "y":fg("yellow"),
+        "b":fg("blue")
     }
-    
+
     def __init__(self):
-        self.intentos = []
-        self.colores_a_adivinar = []
+        self.turnos=[]
+        self.color_adivinar=[]
+
     
-    
-    def establecer_colores(self, colores):
-        self.colores_a_adivinar = colores
-    
-    def evaluar_intento(self, intento):
-        retroalimentacion = []
-        
-        copia_colores_a_adivinar = self.colores_a_adivinar.copy()
-        for i in range(4):
-            if intento[i] == copia_colores_a_adivinar[i]:
-                retroalimentacion.append("verde")
-                copia_colores_a_adivinar[i] = None
-            elif intento[i] in copia_colores_a_adivinar:
-                retroalimentacion.append("amarillo")
-                copia_colores_a_adivinar.remove(intento[i])
+    def definir_color(self,color):
+        self.color_adivinar = color
+
+
+    def comprobar_color(self,intento):
+        retroalimentacion=[]
+
+        copia_color_adivinar = self.color_adivinar.copy()
+        for elemento in range(4):
+            if intento[elemento] == copia_color_adivinar[elemento]:
+                retroalimentacion.append("color_verde")
+                copia_color_adivinar[elemento]=None
+            elif intento[elemento] in copia_color_adivinar:
+                retroalimentacion.append("color_amarillo")
+                copia_color_adivinar.remove(intento[elemento])
             else:
-                retroalimentacion.append("blanco")
+                retroalimentacion.append("color_blanco")
+        
         return retroalimentacion
     
-    def mostrar_tablero(self):
-        for intento, retroalimentacion in self.intento:
-            intento_mostrado = " ".join([self.COLORES[color] + "◉" + attr("reset") for color in intento])
-        
-        retroalimentacion_mostrada = " ".join([
-            fg(2) + "◉" + attr("reset") if feedback == "verde"
-            else fg(3) + "◉" + attr("reset") if feedback == "amarillo"
-            else "◉"
-            for feedback in retroalimentacion
-        ])
-        
-        print(f"{intento_mostrado}     |     {retroalimentacion}")
+
+    def mostrar_tabla(self):
+        for intento,retroalimentacion in self.turnos:
+            intento_jugado = " ".join([self.COLORES[color_jugado]+"o"+attr("reset") for color_jugado in intento])
+
+            retroalimentacion_jugada = " ".join([
+                fg(2) + "o" +attr("reset") if retro_adivina == "color_verde"
+
+                else fg(3) + "o" + attr("reset") if retro_adivina == "color_amarillo"
+
+                else "o"
+
+                for retro_adivina in retroalimentacion
+            ])
+
+        print(f"{intento_jugado}|{retroalimentacion_jugada}")
+
     
-    def actualizar_intentos(self, intento, retroalimentacion):
-        self.intentos.append((intento, retroalimentacion))
+    def actualizar_tablero(self,intento,retroalimentacion):
+        self.turnos.append((intento,retroalimentacion))
