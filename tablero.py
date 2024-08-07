@@ -31,6 +31,15 @@ class Tablero_juego:
                 retroalimentacion.append("blanco")
         return retroalimentacion
     
-    
+    def mostrar_tablero(self):
+        for intento, retroalimentacion in self.intento:
+            intento_mostrado = " ".join([self.COLORES[color] + "◉" + attr("reset") for color in intento])
+        
+        retroalimentacion_mostrada = " ".join([
+            fg(2) + "◉" + attr("reset") if feedback == "verde"
+            else fg(3) + "◉" + attr("reset") if feedback == "amarillo"
+            else "◉"
+            for feedback in retroalimentacion
+        ])
         
     
